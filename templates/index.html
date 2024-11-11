@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+<!-- Creaes a table with the current user's purchses-->
+<table>
+    <tr>
+      <th>Symbol</th>
+      <th>Shares</th>
+      <th>Price</th>
+      <th>Total</th>
+    </tr>
+
+    {% for stock in stocks %}
+    <tr>
+        <td>{{ stock['symbol'] }}</td>
+        <td>{{ stock['SUM(shares)'] }}</td>
+        <td>{{ stock['price'] }}</td>
+        <td>{{ stock['SUM(shares)'] * stock['price'] }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% block main %}
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote lookup
+{% endblock %}
+
+{% block main %}
+  <!-- Prints out the symbol of the stock and the price in dollars-->
+  <p> A share of {{symbol['symbol']}} costs {{symbol['price'] | usd}}</p>
+  <!-- Asked Sam about the usd part-->
+{% endblock %}
