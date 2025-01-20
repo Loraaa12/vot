@@ -4,6 +4,10 @@ from minio import Minio
 from minio.error import S3Error
 import io
 import logging
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -18,8 +22,8 @@ logger = logging.getLogger(__name__)
 # MinIO client setup
 minio_client = Minio(
     "localhost:9000",  # MinIO server address
-    access_key="admin",
-    secret_key="admin123",
+    access_key=os.getenv("MINIO_ACCESS_KEY"),
+    secret_key=os.getenv("MINIO_SECRET_KEY"),
     secure=False
 )
 
@@ -94,7 +98,6 @@ def upload_file():
 # Download endpoint (allowed for 'uchenici' role)
 @app.route('/download/<file_id>', methods=['GET'])
 @jwt_required()
-@has_role("uchenici")  # Only users with the 'uchenici' role can download
 def download_file(file_id):
     try:
         file_data = minio_client.get_object(BUCKET_NAME, file_id)
